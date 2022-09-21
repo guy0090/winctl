@@ -1,15 +1,13 @@
 declare namespace WinCtl {
-  interface WinCtl {
-    // Helper functions?
-    FindWindows(validateFunc: Function): Promise<Window[]>;
-    FindByTitle(title: string): Promise<Window>;
+  // Helper functions?
+  function FindWindows(validateFunc: Function): Promise<Window[]>;
+  function FindByTitle(title: string): Promise<Window>;
 
-    // Window functions
-    GetActiveWindow(): Window;
-    GetWindowByClassName(title: string): Window;
-    GetWindowByTitleExact(title: string): Window;
-    EnumerateWindows(win: Function): void;
-  }
+  // Window functions
+  function GetActiveWindow(): Window;
+  function GetWindowByClassName(title: string): Window;
+  function GetWindowByTitleExact(title: string): Window;
+  function EnumerateWindows(win: Function): void;
 
   interface Dimensions {
     left: number;
@@ -191,8 +189,6 @@ declare namespace WinCtl {
     DEFERERASE = 0x2000,
     ASYNCWINDOWPOS = 0x4000,
   }
-
-  const winctl: WinCtl;
 }
 
 declare module "winctl" {
