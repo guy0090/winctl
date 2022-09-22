@@ -189,6 +189,35 @@ declare namespace WinCtl {
     DEFERERASE = 0x2000,
     ASYNCWINDOWPOS = 0x4000,
   }
+
+  interface WindowEventsEmitter extends NodeJS.EventEmitter {
+    /**
+     * Emitted when {@link WindowEventsEmitter.checkActiveWindow()} is called
+     * and the active window has changed
+     *
+     * @param listener Callback contains the current and previous window
+     */
+    on(event: "active-window", listener: (now: Window, previous: Window) => void): this;
+    addListener(event: "active-window", listener: (now: Window, previous: Window) => void): this;
+
+    /**
+     * Emitted when {@link WindowEventsEmitter.checkNewWindow()} is called
+     * and a new window has been created
+     *
+     * @param listener Callback contains the window that was created
+     */
+    on(event: "window-created", listener: (win: Window) => void): this;
+    addListener(event: "open-window", listener: (win: Window) => void): this;
+
+    removeListener(event: "active-window" | "open-window"): this;
+    removeAllListeners(event:  "active-window" | "open-window"): this;
+
+    updatePollingLoops(): this;
+    checkActiveWindow(): this;
+    checkNewWindow(): this;
+  }
+
+  const Events: WindowEventsEmitter;
 }
 
 declare module "winctl" {
